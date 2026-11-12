@@ -4,6 +4,8 @@ import StudentForm from '../components/students/student-form';
 import Button from '../components/ui/button';
 import type { StudentRequest } from '../types/student';
 import styles from './student-new.module.css';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../firebase';
 
 export default function StudentNew() {
   const navigate = useNavigate();
@@ -13,17 +15,8 @@ export default function StudentNew() {
       PASO 3 · Guardar el estudiante en Cloud Firestore
       ====================================================================== 
     */
-
-
-    /*
-      //1. Imports:
-           import { addDoc, collection } from 'firebase/firestore';
-           import { db } from '../firebase';
-
-      //2. Reemplaza el console.log por:
-           await addDoc(collection(db, 'students'), input);
-    */
-    console.log('Estudiante capturado por el formulario:', input);
+    
+    await addDoc(collection(db, 'students'), input);
 
     navigate('/');
   };

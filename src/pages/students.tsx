@@ -5,6 +5,8 @@ import { StudentTable } from '../components/students/student-table';
 import Button from '../components/ui/button';
 import type { Student } from '../types/student';
 import styles from './students.module.css';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 export default function Students() {
   const navigate = useNavigate();
@@ -22,15 +24,7 @@ export default function Students() {
           ==================================================================
          */
 
-        /*
-         //1. Imports:
-
-              import { collection, getDocs } from 'firebase/firestore';
-              import { db } from '../firebase';
-
-         //2. Reemplaza setStudents([]) por:
-
-              const snapshot = await getDocs(collection(db, 'students'));
+        const snapshot = await getDocs(collection(db, 'students'));
 
               setStudents(
                 snapshot.docs.map((document) => ({
@@ -38,10 +32,6 @@ export default function Students() {
                   ...(document.data() as Omit<Student, 'id'>),
                 })),
               );
-       */
-
-
-        setStudents([]);
       } catch (caught) {
         setError(
           caught instanceof Error
